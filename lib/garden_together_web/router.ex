@@ -7,6 +7,7 @@ defmodule GardenTogetherWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug GardenTogetherWeb.CurrentUser
   end
 
   pipeline :api do
@@ -21,6 +22,10 @@ defmodule GardenTogetherWeb.Router do
 
     get "/register", RegistrationController, :new # name of this file is not significant only templates match on name
     post "/register", RegistrationController, :create
+
+    delete "/logout", SessionController, :delete
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
   end
 
   # Other scopes may use custom stacks.

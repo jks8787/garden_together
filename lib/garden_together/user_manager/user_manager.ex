@@ -28,14 +28,14 @@ defmodule GardenTogether.UserManager do
 
   ## Examples
 
-      iex> get_user!(123)
+      iex> get_user(123)
       %User{}
 
-      iex> get_user!(456)
+      iex> get_user(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user(id), do: Repo.get!(User, id)
 
   @doc """
   Registers a user.
@@ -102,5 +102,31 @@ defmodule GardenTogether.UserManager do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  @doc """
+  authenticates a user
+
+  ## Examples
+
+      iex> #some code here
+
+  """
+  def authenticate_with_email_and_password(email, password) do
+    # with allows you to avoid nested cases
+    with %User{password_hash: hash} = user <- Repo.get_by(User, email: email),
+         true <- Comeonin.Bcrypt.checkpw(password, hash) do
+      {:ok, user}
+    else
+      # nil ->
+      #   {:error, :unauthorized}
+      # false ->
+      #   {:error, :unauthorized}
+
+      # this is best so that nothing is shown to the user
+      _ ->
+        Comeonin.Bcrypt.dummy_checkpw()
+        {:error, :unauthorized}
+    end
   end
 end
