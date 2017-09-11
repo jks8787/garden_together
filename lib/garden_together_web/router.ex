@@ -18,6 +18,9 @@ defmodule GardenTogetherWeb.Router do
 
     get "/", PageController, :index
     get "/home", PageController, :home
+
+    get "/register", RegistrationController, :new # name of this file is not significant only templates match on name
+    post "/register", RegistrationController, :create
   end
 
   # Other scopes may use custom stacks.
