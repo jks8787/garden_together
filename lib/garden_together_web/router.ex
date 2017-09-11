@@ -17,6 +17,7 @@ defmodule GardenTogetherWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/home", PageController, :home
   end
 
   # Other scopes may use custom stacks.
