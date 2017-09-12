@@ -10,10 +10,6 @@ defmodule GardenTogetherWeb.Router do
     plug GardenTogetherWeb.CurrentUser
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", GardenTogetherWeb do
     pipe_through :browser # Use the default browser stack
 
@@ -26,6 +22,8 @@ defmodule GardenTogetherWeb.Router do
     delete "/logout", SessionController, :delete
     get "/login", SessionController, :new
     post "/login", SessionController, :create
+
+    resources "/gardens", GardenController
   end
 
   # Other scopes may use custom stacks.

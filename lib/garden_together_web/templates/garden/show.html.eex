@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2>
+    <%= @garden.info %>
+    <small>#<%= @garden.id %></small>
+  </h2>
+</div>
+<div id="garden" data-garden-id="<%= @garden.id %>">
