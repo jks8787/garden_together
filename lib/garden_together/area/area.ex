@@ -1,7 +1,7 @@
 # require IEx;
 defmodule GardenTogether.Area do
   @moduledoc """
-  The Area context.
+  The Area Context.
   """
 
   import Ecto.Query, warn: false
@@ -90,7 +90,6 @@ defmodule GardenTogether.Area do
 
   """
   def update_garden(%Garden{} = garden, attrs) do
-    # IEx.pry
     garden
     |> Garden.changeset(attrs)
     |> Repo.update()

@@ -8,7 +8,7 @@
   <%= @current_user.name %>
 
   <div class="form-group">
-    <%= text_input f, :info, placeholder: "info", class: "form-control" %>
+    <%= text_input f, :info, placeholder: "Subject", class: "form-control" %>
     <%= error_tag f, :info %>
   </div>
 

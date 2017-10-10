@@ -11,5 +11,6 @@ if (window.userToken) {
 }
 
 if (el) {
+  console.log('el.dataset.gardenId', el.dataset.gardenId)
   render(<Garden socket={socket} gardenId={el.dataset.gardenId} />, el)
 }

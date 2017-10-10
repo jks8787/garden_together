@@ -4,7 +4,7 @@ defmodule GardenTogetherWeb.GardenController do
   alias GardenTogether.Area
   alias GardenTogether.Area.{Comment, Garden}
 
-  plug :authorize when action not in [:index, :show]
+  plug :authorize when action in [:create, :delete, :new]
 
   def index(conn, _params) do
     gardens = Area.list_gardens()
@@ -21,7 +21,7 @@ defmodule GardenTogetherWeb.GardenController do
     case Area.create_garden(conn.assigns.current_user, garden_params) do
       {:ok, garden} ->
         conn
-        |> put_flash(:info, "garden created successfully.")
+        |> put_flash(:info, "Garden created successfully.")
         |> redirect(to: garden_path(conn, :show, garden))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -45,7 +45,7 @@ defmodule GardenTogetherWeb.GardenController do
     case Area.update_garden(garden, garden_params) do
       {:ok, garden} ->
         conn
-        |> put_flash(:info, "garden updated successfully.")
+        |> put_flash(:info, "Garden updated successfully.")
         |> redirect(to: garden_path(conn, :show, garden))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", garden: garden, changeset: changeset)
@@ -57,7 +57,7 @@ defmodule GardenTogetherWeb.GardenController do
     {:ok, _garden} = Area.delete_garden(garden)
 
     conn
-    |> put_flash(:info, "garden deleted successfully.")
+    |> put_flash(:info, "Garden deleted successfully.")
     |> redirect(to: garden_path(conn, :index))
   end
 

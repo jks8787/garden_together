@@ -1,8 +1,11 @@
+# require IEx;
 defmodule GardenTogetherWeb.GardenChannel do
   use GardenTogetherWeb, :channel
   alias GardenTogetherWeb.Presence
 
   def join("gardens:" <> id, _payload, socket) do
+    # this was failing here
+    #IEx.pry
     garden = GardenTogether.Area.get_garden!(id)
     send(self(), :after_join)
     {:ok, assign(socket, :garden, garden)}

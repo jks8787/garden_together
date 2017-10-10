@@ -1,4 +1,3 @@
-# require IEx;
 defmodule GardenTogether.Area.GardenCreator do
   import Ecto.Changeset
   alias GardenTogether.{Repo, Area}
@@ -18,7 +17,6 @@ defmodule GardenTogether.Area.GardenCreator do
   end
 
   defp comment_changeset(user, attrs) do
-    # IEx.pry
     %Area.Comment{}
     |> cast(attrs, [:body])
     |> validate_required([:body])

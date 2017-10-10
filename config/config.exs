@@ -12,7 +12,7 @@ config :garden_together,
 # Configures the endpoint
 config :garden_together, GardenTogetherWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "BsAPejuJq/RTSQP7a8TdJiTMrB7I2FstRDKwg9OmcpzV7LQolnhkdsWNA2IrPr4K",
+  secret_key_base: "B8rAPVhOORA+3UBjP0O0D9p9yn/lJCjXwxrMtedM78/fqhe0q0Nn2Ih2Dei+M5OO",
   render_errors: [view: GardenTogetherWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: GardenTogether.PubSub,
            adapter: Phoenix.PubSub.PG2]

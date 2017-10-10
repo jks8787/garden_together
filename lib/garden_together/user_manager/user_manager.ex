@@ -28,14 +28,32 @@ defmodule GardenTogether.UserManager do
 
   ## Examples
 
-      iex> get_user(123)
+      iex> get_user!(123)
       %User{}
 
-      iex> get_user(456)
+      iex> get_user!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_user(id), do: Repo.get!(User, id)
+  def get_user!(id), do: Repo.get!(User, id)
+
+  @doc """
+  Creates a user.
+
+  ## Examples
+
+      iex> create_user(%{field: value})
+      {:ok, %User{}}
+
+      iex> create_user(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_user(attrs \\ %{}) do
+    %User{}
+    |> User.changeset(attrs)
+    |> Repo.insert()
+  end
 
   @doc """
   Registers a user.
@@ -49,12 +67,33 @@ defmodule GardenTogether.UserManager do
       {:error, %Ecto.Changeset{}}
 
   """
-  def register_user(attrs \\ %{}) do # here there is a default of an empty struct as the attributes
+  def register_user(attrs \\ %{}) do
     %User{}
-    |> User.registration_changeset(attrs) # apply the change set
-    |> Repo.insert() # insert it
-    # note - with aliases now can run
-    # `UserManager.register_user(%{name: "j", email: "j@j.com", password: "password", password_confirmation: "password"})`
+    |> User.registration_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Finds a user matching the given email and password.
+
+  ## Examples
+
+      iex> authenticate_with_email_and_password("example@example.org", "valid-password")
+      {:ok, %User{}}
+
+      iex> authenticate_with_email_and_password("example@example.org", "invalid-password")
+      {:error, :unauthorized}
+
+  """
+  def authenticate_with_email_and_password(email, password) do
+    with %User{password_hash: hash} = user <- Repo.get_by(User, email: email),
+         true <- Comeonin.Bcrypt.checkpw(password, hash) do
+      {:ok, user}
+    else
+      _ ->
+        Comeonin.Bcrypt.dummy_checkpw()
+        {:error, :unauthorized}
+    end
   end
 
   @doc """
@@ -102,31 +141,5 @@ defmodule GardenTogether.UserManager do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
-  end
-
-  @doc """
-  authenticates a user
-
-  ## Examples
-
-      iex> #some code here
-
-  """
-  def authenticate_with_email_and_password(email, password) do
-    # with allows you to avoid nested cases
-    with %User{password_hash: hash} = user <- Repo.get_by(User, email: email),
-         true <- Comeonin.Bcrypt.checkpw(password, hash) do
-      {:ok, user}
-    else
-      # nil ->
-      #   {:error, :unauthorized}
-      # false ->
-      #   {:error, :unauthorized}
-
-      # this is best so that nothing is shown to the user
-      _ ->
-        Comeonin.Bcrypt.dummy_checkpw()
-        {:error, :unauthorized}
-    end
   end
 end

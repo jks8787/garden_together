@@ -1,9 +1,11 @@
-<%= if @current_user do %>
-    <!--  gettext is used for internationalization -->
-    <h2><%= gettext "Welcome to %{name}!", name: @current_user.name %></h2>
-    <%= link "Logout", to: session_path(@conn, :delete), method: :delete, class: "btn btn-info" %>
+<div class="jumbotron">
+  <%= if @current_user do %>
+    <h2><%= gettext "Welcome to %{app_name}, %{name}!", app_name: "Garden Together", name: @current_user.name %></h2>
+    <%= link "Logout", to: session_path(@conn, :delete), class: "btn btn-danger", method: :delete %>
   <% else %>
-    <h2>You are Not Logged In</h2>
+    <h2><%= gettext "Welcome to %{app_name}!", app_name: "Garden Together" %></h2>
     <%= link "Login", to: session_path(@conn, :new), class: "btn btn-default" %>
+    or
     <%= link "Register", to: registration_path(@conn, :new), class: "btn btn-primary" %>
-<% end %>
+  <% end %>
+</div>

@@ -27,6 +27,8 @@ export default class Garden extends Component {
   }
 
   componentDidMount() {
+    console.log(this.state.channel);
+    console.log(this.state.channel.join);
     this.state.channel.join()
       .receive("ok", resp => { console.log("Joined successfully", resp) })
       .receive("error", resp => { console.log("Unable to join", resp) })

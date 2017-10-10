@@ -7,7 +7,6 @@ defmodule GardenTogetherWeb.SessionController do
     render conn, "new.html"
   end
 
-  # any time the data comes in, it is always string keys
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
     case UserManager.authenticate_with_email_and_password(email, password) do
       {:ok, user} ->

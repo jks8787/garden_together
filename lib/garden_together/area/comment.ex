@@ -1,4 +1,4 @@
-# require IEx;
+
 defmodule GardenTogether.Area.Comment do
   use Ecto.Schema
   import Ecto.Changeset
@@ -16,7 +16,6 @@ defmodule GardenTogether.Area.Comment do
 
   @doc false
   def changeset(%Comment{} = comment, attrs) do
-    # IEx.pry
     comment
     |> cast(attrs, [:body])
     |> validate_required([:body])

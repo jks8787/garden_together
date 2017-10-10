@@ -52,7 +52,6 @@ export default class CommentList extends Component {
       </ul>
     )
 
-    console.log('comments', this.state.comments)
     return(
       <div id="comment-list">
         {comments}

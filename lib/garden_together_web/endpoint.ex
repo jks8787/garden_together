@@ -36,7 +36,7 @@ defmodule GardenTogetherWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_garden_together_key",
-    signing_salt: "/WZg/kHx"
+    signing_salt: "BKrq7Mi2"
 
   plug GardenTogetherWeb.Router
 

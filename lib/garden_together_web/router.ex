@@ -14,20 +14,14 @@ defmodule GardenTogetherWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/home", PageController, :home
 
-    get "/register", RegistrationController, :new # name of this file is not significant only templates match on name
+    get "/register", RegistrationController, :new
     post "/register", RegistrationController, :create
 
-    delete "/logout", SessionController, :delete
     get "/login", SessionController, :new
     post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
 
     resources "/gardens", GardenController
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", GardenTogetherWeb do
-  #   pipe_through :api
-  # end
 end

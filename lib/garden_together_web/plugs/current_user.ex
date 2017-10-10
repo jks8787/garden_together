@@ -16,7 +16,7 @@ defmodule GardenTogetherWeb.CurrentUser do
   defp get_user_from_session(conn) do
     case get_session(conn, :current_user_id) do
       nil -> nil
-      val -> UserManager.get_user(val)
+      val -> UserManager.get_user!(val)
     end
   end
 

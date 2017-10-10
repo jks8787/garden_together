@@ -9,9 +9,9 @@ defmodule GardenTogetherWeb.Presence do
 
   Presences can be tracked in your channel after joining:
 
-      defmodule Acme.MyChannel do
-        use GardenTogether, :channel
-        alias Acme.Presence
+      defmodule GardenTogether.MyChannel do
+        use GardenTogetherWeb, :channel
+        alias GardenTogether.Presence
 
         def join("some:topic", _params, socket) do
           send(self, :after_join)
@@ -68,6 +68,6 @@ defmodule GardenTogetherWeb.Presence do
   information, while maintaining the required `:metas` field from the
   original presence data.
   """
-  use Phoenix.Presence, otp_app: :acme,
+  use Phoenix.Presence, otp_app: :garden_together,
                         pubsub_server: GardenTogether.PubSub
 end

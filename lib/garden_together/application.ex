@@ -12,12 +12,13 @@ defmodule GardenTogether.Application do
       supervisor(GardenTogether.Repo, []),
       # Start the endpoint when the application starts
       supervisor(GardenTogetherWeb.Endpoint, []),
+      supervisor(GardenTogetherWeb.Presence, []),
       # Start your own worker by calling: GardenTogether.Worker.start_link(arg1, arg2, arg3)
       # worker(GardenTogether.Worker, [arg1, arg2, arg3]),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
+    # for other strategies and areaed options
     opts = [strategy: :one_for_one, name: GardenTogether.Supervisor]
     Supervisor.start_link(children, opts)
   end
